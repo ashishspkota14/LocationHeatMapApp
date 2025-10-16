@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             x:Class="LocationHeatMapApp.Views.MainView"
+             Title="MainView">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Map View -->
+        <maps:Map x:Name="HeatMap"
+                  Grid.Row="0"
+                  IsShowingUser="True"
+                  MapType="Street">
+        </maps:Map>
+
+        <!-- Control Panel -->
+        <Frame Grid.Row="1"
+               BackgroundColor="{StaticResource Primary}"
+               CornerRadius="20,20,0,0"
+               Padding="20"
+               HasShadow="True">
+
+            <VerticalStackLayout Spacing="15">
+
+                <!-- Status Information -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="10"
+                       Padding="15"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="Status:"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}"/>
+
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="{Binding LocationCount, StringFormat='{0} points'}"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}"/>
+
+                        <Label Grid.Row="1" Grid.ColumnSpan="2"
+                               Text="{Binding StatusMessage}"
+                               TextColor="{StaticResource Gray600}"
+                               FontSize="12"
+                               Margin="0,5,0,0"/>
+
+                    </Grid>
+                </Frame>
+
+                <!-- Control Buttons -->
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+
+                    <!-- Start/Stop Tracking Button -->
+                    <Button Grid.Column="0"
+                            Text="{Binding TrackingButtonText}"
+                            Command="{Binding ToggleTrackingCommand}"
+                            BackgroundColor="White"
+                            TextColor="{StaticResource Primary}"
+                            CornerRadius="10"
+                            FontAttributes="Bold"/>
+
+                    <!-- Refresh Heat Map Button -->
+                    <Button Grid.Column="1"
+                            Text="Refresh"
+                            Command="{Binding RefreshHeatMapCommand}"
+                            BackgroundColor="White"
+                            TextColor="{StaticResource Primary}"
+                            CornerRadius="10"
+                            FontAttributes="Bold"/>
+
+                    <!-- Clear Data Button -->
+                    <Button Grid.Column="2"
+                            Text="Clear"
+                            Command="{Binding ClearDataCommand}"
+                            BackgroundColor="#FF6B6B"
+                            TextColor="White"
+                            CornerRadius="10"
+                            FontAttributes="Bold"/>
+
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </Frame>
+
+    </Grid>
+
+</ContentPage>
